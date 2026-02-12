@@ -6,11 +6,14 @@ import (
 
 func (a *applicationDependencies) healthcheckHandler(w http.ResponseWriter,
 	r *http.Request) {
-	data := map[string]string{
-		"status":      "available",
-		"environment": a.config.environment,
-		"version":     appVersion,
+	data := envelope{
+		"status": "available",
+		"system_info": map[string]string{
+			"environment": a.config.environment,
+			"version":     appVersion,
+		},
 	}
+	
 	err := a.writeJSON(w, http.StatusOK, data, nil)
 	if err != nil {
 		a.logger.Error(err.Error())
