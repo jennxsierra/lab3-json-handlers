@@ -19,5 +19,6 @@ func (a *applicationDependencies) routes() http.Handler {
 
 	// setup routes
 	router.HandlerFunc(http.MethodGet, "/v1/healthcheck", a.healthcheckHandler)
-	return router
+
+	return a.recoverPanic(router)
 }

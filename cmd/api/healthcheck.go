@@ -6,6 +6,7 @@ import (
 
 func (a *applicationDependencies) healthcheckHandler(w http.ResponseWriter,
 	r *http.Request) {
+
 	data := envelope{
 		"status": "available",
 		"system_info": map[string]string{
@@ -13,6 +14,7 @@ func (a *applicationDependencies) healthcheckHandler(w http.ResponseWriter,
 			"version":     appVersion,
 		},
 	}
+
 	err := a.writeJSON(w, http.StatusOK, data, nil)
 	if err != nil {
 		a.serverErrorResponse(w, r, err)
